@@ -17,8 +17,8 @@ from plotly.figure_factory import create_distplot
 from ...utils import get_module_by_module_path
 
 
-class BaseGraph(object):
-    """"""
+class BaseGraph:
+    """ """
 
     _name = None
 
@@ -161,7 +161,7 @@ class DistplotGraph(BaseGraph):
         """
         _t_df = self._df.dropna()
         _data_list = [_t_df[_col] for _col in self._name_dict]
-        _label_list = [_name for _name in self._name_dict.values()]
+        _label_list = list(self._name_dict.values())
         _fig = create_distplot(_data_list, _label_list, show_rug=False, **self._graph_kwargs)
 
         return _fig["data"]
@@ -204,7 +204,7 @@ class HistogramGraph(BaseGraph):
         return _data
 
 
-class SubplotsGraph(object):
+class SubplotsGraph:
     """Create subplots same as df.plot(subplots=True)
 
     Simple package for `plotly.tools.subplots`

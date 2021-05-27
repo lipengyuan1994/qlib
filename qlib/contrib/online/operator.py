@@ -21,7 +21,7 @@ from .executor import SimulatorExecutor
 from .executor import save_score_series, load_score_series
 
 
-class Operator(object):
+class Operator:
     def __init__(self, client: str):
         """
         Parameters
@@ -148,7 +148,7 @@ class Operator(object):
         for user_id, user in um.users.items():
             dates, trade_exchange = prepare(um, trade_date, user_id, exchange_config)
             executor = SimulatorExecutor(trade_exchange=trade_exchange)
-            if not str(dates[0].date()) == str(pred_date.date()):
+            if str(dates[0].date()) != str(pred_date.date()):
                 raise ValueError(
                     "The account data is not newest! last trading date {}, today {}".format(
                         dates[0].date(), trade_date.date()
